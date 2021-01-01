@@ -164,10 +164,11 @@ You should be able to fix it by starting again from ubuntu live and checking, ch
 then you can repeat from the installation step for the remaining instances of ubuntu you want to install.
 
 ## GRUB issues:
-TODO:
+TODO: [link][grub does not detect other partition]
 
 [encrypting disks on ubuntu]: https://medium.com/@chrishantha/encrypting-disks-on-ubuntu-19-04-b50bfc65182a
 [arch lvm on luks]: https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS
 [arch wipe disk]: todo
 [boot process]: https://linuxhint.com/understanding_boot_process_bios_uefi/
 [cypttab]: todo
+[grub does not detect other partition]: https://ubuntuforums.org/showthread.php?t=2455975 
