@@ -1,6 +1,7 @@
 # Ubuntu dual boot with encrypted partitions
 
-The following guide is a work in progress. It probably does contain mistakes and if you decide to fo follow it be aware that you are doing it at your own risk.
+The following guide is a work in progress. It probably does contain mistakes!
+If you decide to fo follow it, do it at your own risk.
 
 Encrypting partitions in this way is not a standard flow offered by linux distributions.
 I've decided to write some notes so that next time I'll not have to restart from scratch.
@@ -42,11 +43,12 @@ commands:
 
 
 
-## waring
+## warning
 TODO: backup warning
 TODO: disk wiping warning
 TODO: disclaimer on uefi/gpt
 TODO: disclaimer on tested only on ubunt 20.04
+TODO: disclaimer on the fact that boot partitions are not encrypted
 
 ## instructions
 First you want to partition your drive
