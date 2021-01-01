@@ -22,7 +22,7 @@ Assuming you use uefi(todo:link to uefi) you want to have:
  - one ESP patition (todo: link to esp) (around 200/300 mb)
  - one partition **for each** ubuntu installation that will be mounted as */boot* (around 500mb)
  - one partition **for each** ubuntu installation that we will encrypt using luks that will contain our */*, *swap* (and */home* if you like)
-![starting point](01_starting_point.png)
+![starting point](01_starting_point.png =250x)
 
 
 
