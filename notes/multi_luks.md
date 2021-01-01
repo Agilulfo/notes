@@ -44,17 +44,17 @@ TODO: disk wiping warning
 First you want to partition your drive
 
 
-### partitioning
+### [Step 1] partitioning
 Assuming you use uefi(todo:link to uefi) you want to have:
  - one ESP patition (todo: link to esp) (around 200/300 mb)
  - one partition **for each** ubuntu installation that will be mounted as */boot* (around 500mb), this partition will contain the bootloader (grub) and the kernels. (Such partition will not be encrypted) 
- - one partition **for each** ubuntu installation that we will encrypt using luks that will contain our */*, *swap* (and */home* if you like)
+ - one partition **for each** ubuntu installation thzat we will encrypt using luks that will contain our */*, *swap* (and */home* if you like)
 
 ![starting point](01_starting_point.png)
 
 you can use tools like *gparted* or *partitionmanager* (on kde) to edit your partition table (gpt on uefi) to reach the result above.
 
-### encryption setup
+### [Step 2] encryption setup
 
 #### setup luks
 
@@ -88,11 +88,11 @@ sudo lvcreate -l 100%FREE pvg -n root
 tip: if you make mistakes, commands such as lvrename are available 
 tip: use regularly lsblk to check if you are getting the result you would 
 
-### Perform the installation
+### [Step 3] Perform the installation
 
 Now is time to perform the installation of ubuntu. chose to manually select the partitions and set accordingly the partitions to use as */boot*, *swap* and */* 
 
-### configure kernel to load the partitions
+### [Step 4] configure kernel to load the partitions
 
 Use lsblk to get the uuid of the parition 
 for instance in my case the uuid I have to take note is `48b7b2e4-4c03-4339-98f8-672e897ea5fc`
