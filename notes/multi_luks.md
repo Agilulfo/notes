@@ -116,12 +116,16 @@ mount -t sysfs sys /sys
 mount -t devpts devpts /dev/pts
 sudo nano /etc/crypttab
 ```
+TODO: not sure if all the mount commants are necessary.
+
 the content of your */etc/cypttab* should look like this:
+
 ```
 work UUID=48b7b2e4-4c03-4339-98f8-672e897ea5fc none luks,discard
 ```
 
 last but not least
+
 ``` bash
 update-initramfs -k all -c
 ```
@@ -129,8 +133,16 @@ update-initramfs -k all -c
 tip: this should scream some warnings if there is a mistake with crypttab. 
 In such case check again and fix the content of /etc/crypttab.
 
+Once finished restart. 
+You sould be promted for the password of your volume and once you type it you should be able to start your pc.
 
-TODO: not sure if all the mount commants are necessary.
+If this does not happen you have likelly messedup something in the /etc/crypttab. 
+You should be able to fix it by starting again from ubuntu live and checking, chrooting and repeating the last steps. 
+
+then you can repeat from the installation step for the remaining instances of ubuntu you want to install.
+
+## GRUB issues:
+TODO:
 
 [encrypting disks on ubuntu]: https://medium.com/@chrishantha/encrypting-disks-on-ubuntu-19-04-b50bfc65182a
 [arch lvm on luks]: https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS
