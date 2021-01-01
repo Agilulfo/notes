@@ -1,4 +1,7 @@
 # Ubuntu dual boot with encrypted partitions
+
+The following guide is a work in progress. It probably does contain mistakes and if you decide to fo follow it be aware that you are doing it at your own risk.
+
 Encrypting partitions in this way is not a standard flow offered by linux distributions.
 I've decided to write some notes so that next time I'll not have to restart from scratch.
 
@@ -17,10 +20,13 @@ The solution I've decided to put in place is to have 2 separate os (ubuntu linux
 You also want to encrypt both partitions so that one installation cannot temper with data in the other. This should address the 2nd concern.
 
 ## basics
-TODO
+You might want to refresh you knowledge on how [boot process] works on linux
 
 ## references
-TODO
+The process described in this document is a mix of the following guides/articles
+
+- [encrypting disks on ubuntu]
+- [Arch wiki on how to encrypt using LVM on LUKS][arch lvm on luks]
 
 ## tools
 TODO
@@ -39,6 +45,8 @@ commands:
 ## waring
 TODO: backup warning
 TODO: disk wiping warning
+TODO: disclaimer on uefi/gpt
+TODO: disclaimer on tested only on ubunt 20.04
 
 ## instructions
 First you want to partition your drive
