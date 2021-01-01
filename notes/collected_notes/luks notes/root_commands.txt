@@ -1,0 +1,10 @@
+    1  mount -t proc proc /proc
+    2  mount -t sysfs sys /sys
+    3  mount -t devpts devpts /dev/pts
+    4  sudo nano /etc/crypttab
+    5  sudo kate /etc/crypttab
+    6  sudo nano /etc/crypttab
+    7  cat /etc/crypttab 
+    8  update-initramfs -k all -c
+    9  lsblk -o name,uuid,mountpoint
+   10  history

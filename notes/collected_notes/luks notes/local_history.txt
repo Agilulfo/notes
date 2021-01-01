@@ -1,0 +1,38 @@
+    1  lsblk 
+    2  sudo cryptsetup --hash=sha512 --key-size=512 /dev/nvme0n1p4
+    3  sudo cryptsetup luksFormat --hash=sha512 --key-size=512 /dev/nvme0n1p4
+    4  clear
+    5  sudo cryptsetup luksFormat --hash=sha512 --key-size=512 /dev/nvme0n1p4
+    6  
+    7  sudo cryptsetup open --type=luks /dev/nvme0n1p4 work
+    8  sudo cryptsetup open --type=luks /dev/nvme0n1p5 personal
+    9  lsblk
+   10  clear
+   11  lsblk
+   12  sudo pvcreate /dev/mapper/work 
+   13  sudo vgcreate wvg /dev/mapper/work 
+   14  sudo lvcreate -L 8G wvg -n swap
+   15  sudo lvcreate -l 100%FREE wvg -n home
+   16  sudo pvcreate /dev/mapper/personal
+   17  sudo vgcreate pvg /dev/mapper/personal
+   18  sudo lvcreate -L 8G pvg -n swap
+   19  sudo lvcreate -l 100%FREE pvg -n home
+   20  clear
+   21  lsblk
+   22  sudo lvrename home root
+   23  lcrename --help
+   24  lvrename --help
+   25  sudo lvrename private home root
+   26  sudo lvrename personal home root
+   27  lsblk
+   28  sudo lvrename pvg home root
+   29  sudo lvrename wvg home root
+   30  lsblk
+   31  sudo mount /dev/mapper/wvg-root /mnt
+   32  sudo mount /dev/nvme0n1p2 /mnt/boot
+   33  sudo mount --bind /dev /mnt/dev
+   34  swapon /dev/mapper/wvg-swap
+   35  sudo swapon /dev/mapper/wvg-swap
+   36  sudo chroot /mnt
+   37  history 
+   38  history > local_history.txt

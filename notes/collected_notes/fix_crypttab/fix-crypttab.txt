@@ -1,0 +1,113 @@
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+kubuntu@kubuntu:~$ lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+loop0         7:0    0   1.7G  1 loop /rofs
+sda           8:0    1  28.9G  0 disk 
+├─sda1        8:1    1   2.2G  0 part /cdrom
+├─sda2        8:2    1   3.9M  0 part 
+└─sda3        8:3    1  26.7G  0 part /var/crash
+nvme0n1     259:0    0 953.9G  0 disk 
+├─nvme0n1p1 259:1    0   300M  0 part 
+├─nvme0n1p2 259:2    0   700M  0 part 
+├─nvme0n1p3 259:3    0   700M  0 part 
+├─nvme0n1p4 259:4    0 244.1G  0 part 
+└─nvme0n1p5 259:5    0 708.1G  0 part 
+kubuntu@kubuntu:~$ crypt
+cryptdisks_start      cryptdisks_stop       cryptsetup            cryptsetup-reencrypt  
+kubuntu@kubuntu:~$ sudo cryptsetup open /dev/nv
+nvme0      nvme0n1    nvme0n1p1  nvme0n1p2  nvme0n1p3  nvme0n1p4  nvme0n1p5  nvram      
+kubuntu@kubuntu:~$ sudo cryptsetup open /dev/nvme0n1p4 work
+Enter passphrase for /dev/nvme0n1p4: 
+kubuntu@kubuntu:~$ lsblk
+NAME           MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+loop0            7:0    0   1.7G  1 loop  /rofs
+sda              8:0    1  28.9G  0 disk  
+├─sda1           8:1    1   2.2G  0 part  /cdrom
+├─sda2           8:2    1   3.9M  0 part  
+└─sda3           8:3    1  26.7G  0 part  /var/crash
+nvme0n1        259:0    0 953.9G  0 disk  
+├─nvme0n1p1    259:1    0   300M  0 part  
+├─nvme0n1p2    259:2    0   700M  0 part  
+├─nvme0n1p3    259:3    0   700M  0 part  
+├─nvme0n1p4    259:4    0 244.1G  0 part  
+│ └─work       253:0    0 244.1G  0 crypt 
+│   ├─wvg-swap 253:1    0     8G  0 lvm   
+│   └─wvg-root 253:2    0 236.1G  0 lvm   
+└─nvme0n1p5    259:5    0 708.1G  0 part  
+kubuntu@kubuntu:~$ cat /etc/
+Display all 232 possibilities? (y or n)
+kubuntu@kubuntu:~$ cat /dev/
+Display all 253 possibilities? (y or n)
+kubuntu@kubuntu:~$ cat /dev/m
+mapper/ mcelog  media0  media1  mei0    mem     mqueue/ 
+kubuntu@kubuntu:~$ cat /dev/mapper/
+control   work      wvg-root  wvg-swap  
+kubuntu@kubuntu:~$ sudo mount /dev/mapper/w
+work      wvg-root  wvg-swap  
+kubuntu@kubuntu:~$ sudo mount /dev/mapper/wvg-root /mnt
+kubuntu@kubuntu:~$ sudo mount /dev/nv
+nvme0      nvme0n1    nvme0n1p1  nvme0n1p2  nvme0n1p3  nvme0n1p4  nvme0n1p5  nvram      
+kubuntu@kubuntu:~$ sudo mount /dev/nvme0n1p2 /mnt/boot
+kubuntu@kubuntu:~$ sudo mount --bind /dev /mnt/dev
+kubuntu@kubuntu:~$ sudo chroot/mnt
+sudo: chroot/mnt: command not found
+kubuntu@kubuntu:~$ sudo chroot /mnt
+root@kubuntu:/# mount -t proc proc /proc
+root@kubuntu:/# mount -t sysfs sys /sys
+root@kubuntu:/# mount -t devpts devpts /dev/pts
+root@kubuntu:/# cat /etc/cr
+cracklib/             cron.daily/           cron.monthly/         cron.weekly/          crypttab
+cron.d/               cron.hourly/          crontab               cryptsetup-initramfs/ 
+root@kubuntu:/# cat /etc/cr
+cracklib/             cron.daily/           cron.monthly/         cron.weekly/          crypttab
+cron.d/               cron.hourly/          crontab               cryptsetup-initramfs/ 
+root@kubuntu:/# cat /etc/crypttab
+root_crypt UUID=48b7b2e4-4c03-4339-98f8-672e897ea5fc none luks,discard
+root@kubuntu:/# nano /etc/crypttab 
+root@kubuntu:/# cat /etc/crypttab 
+work UUID=48b7b2e4-4c03-4339-98f8-672e897ea5fc none luks,discard
+root@kubuntu:/# update-i
+update-icon-caches  update-ieee-data    update-inetd        update-info-dir     update-initramfs
+root@kubuntu:/# update-i
+update-icon-caches  update-ieee-data    update-inetd        update-info-dir     update-initramfs
+root@kubuntu:/# update-initramfs -k all -c
+update-initramfs: Generating /boot/initrd.img-5.4.0-26-generic
+root@kubuntu:/# ^C
+root@kubuntu:/# 
+
+
+kubuntu@kubuntu:~$ lsblk
+NAME           MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+loop0            7:0    0   1.7G  1 loop  /rofs
+sda              8:0    1  28.9G  0 disk  
+├─sda1           8:1    1   2.2G  0 part  /cdrom
+├─sda2           8:2    1   3.9M  0 part  
+└─sda3           8:3    1  26.7G  0 part  /var/crash
+nvme0n1        259:0    0 953.9G  0 disk  
+├─nvme0n1p1    259:1    0   300M  0 part  
+├─nvme0n1p2    259:2    0   700M  0 part  /mnt/boot
+├─nvme0n1p3    259:3    0   700M  0 part  
+├─nvme0n1p4    259:4    0 244.1G  0 part  
+│ └─work       253:0    0 244.1G  0 crypt 
+│   ├─wvg-swap 253:1    0     8G  0 lvm   
+│   └─wvg-root 253:2    0 236.1G  0 lvm   /mnt
+└─nvme0n1p5    259:5    0 708.1G  0 part  
+kubuntu@kubuntu:~$ sudo  lsblk -o name,uuid,mountpoint
+NAME           UUID                                   MOUNTPOINT
+loop0                                                 /rofs
+sda            2020-04-23-07-59-42-00                 
+├─sda1         2020-04-23-07-59-42-00                 /cdrom
+├─sda2         1AC3-20ED                              
+└─sda3         c278ed1f-6ac6-41a1-9074-7db516723945   /var/crash
+nvme0n1                                               
+├─nvme0n1p1    6BFB-F958                              
+├─nvme0n1p2    1b0a7b5a-d724-4727-9ebc-06cd099ac37d   /mnt/boot
+├─nvme0n1p3    5702f183-eb74-49ff-9e8b-79515e103e1b   
+├─nvme0n1p4    48b7b2e4-4c03-4339-98f8-672e897ea5fc   
+│ └─work       DpOYw5-Pivu-edGh-Ngqh-UTSN-jXL7-uXlP1H 
+│   ├─wvg-swap 9cdc59eb-9e97-4e7b-a1fa-56eced8f83f1   
+│   └─wvg-root 22c6b822-f9be-40e0-84b7-def2548466c0   /mnt
+└─nvme0n1p5    614c65f4-821a-47ba-853e-c49e1921631a   
+kubuntu@kubuntu:~$ 

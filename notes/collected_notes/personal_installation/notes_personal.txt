@@ -1,0 +1,87 @@
+kubuntu@kubuntu:~$ lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+loop0         7:0    0   1.7G  1 loop /rofs
+sda           8:0    1  28.9G  0 disk 
+├─sda1        8:1    1   2.2G  0 part /cdrom
+├─sda2        8:2    1   3.9M  0 part 
+└─sda3        8:3    1  26.7G  0 part /var/crash
+nvme0n1     259:0    0 953.9G  0 disk 
+├─nvme0n1p1 259:1    0   300M  0 part 
+├─nvme0n1p2 259:2    0   700M  0 part 
+├─nvme0n1p3 259:3    0   700M  0 part 
+├─nvme0n1p4 259:4    0 244.1G  0 part 
+└─nvme0n1p5 259:5    0 708.1G  0 part 
+kubuntu@kubuntu:~$ sudo cryptsetup open /dev/nvme0n1p5 personal
+Enter passphrase for /dev/nvme0n1p5: 
+No key available with this passphrase.
+Enter passphrase for /dev/nvme0n1p5: 
+kubuntu@kubuntu:~$ lsblk
+NAME           MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+loop0            7:0    0   1.7G  1 loop  /rofs
+sda              8:0    1  28.9G  0 disk  
+├─sda1           8:1    1   2.2G  0 part  /cdrom
+├─sda2           8:2    1   3.9M  0 part  
+└─sda3           8:3    1  26.7G  0 part  /var/crash
+nvme0n1        259:0    0 953.9G  0 disk  
+├─nvme0n1p1    259:1    0   300M  0 part  
+├─nvme0n1p2    259:2    0   700M  0 part  
+├─nvme0n1p3    259:3    0   700M  0 part  
+├─nvme0n1p4    259:4    0 244.1G  0 part  
+└─nvme0n1p5    259:5    0 708.1G  0 part  
+  └─personal   253:0    0 708.1G  0 crypt 
+    ├─pvg-swap 253:1    0     8G  0 lvm   
+    └─pvg-root 253:2    0 700.1G  0 lvm   
+kubuntu@kubuntu:~$
+
+
+kubuntu@kubuntu:~$ sudo lsblk -o name,uuid,mountpoint
+NAME           UUID                                   MOUNTPOINT
+loop0                                                 /rofs
+sda            2020-04-23-07-59-42-00                 
+├─sda1         2020-04-23-07-59-42-00                 /cdrom
+├─sda2         1AC3-20ED                              
+└─sda3         c278ed1f-6ac6-41a1-9074-7db516723945   /var/crash
+nvme0n1                                               
+├─nvme0n1p1    6BFB-F958                              
+├─nvme0n1p2    1b0a7b5a-d724-4727-9ebc-06cd099ac37d   
+├─nvme0n1p3    3773fe6d-383b-4e33-93be-17f17a369e46   
+├─nvme0n1p4    48b7b2e4-4c03-4339-98f8-672e897ea5fc   
+└─nvme0n1p5    614c65f4-821a-47ba-853e-c49e1921631a   
+  └─personal   jla1uQ-SwRQ-Mllk-ikwV-4adW-ArbV-BkKHda 
+    ├─pvg-swap 21411158-bbf8-4ef9-b57f-caf25f01026f   [SWAP]
+    └─pvg-root 533b29ae-118c-4b5a-9e87-72777a6c203c   
+kubuntu@kubuntu:~$ 
+
+kubuntu@kubuntu:~$ sudo mount /dev/mapper/
+control   personal  pvg-root  pvg-swap  
+kubuntu@kubuntu:~$ sudo mount /dev/mapper/pvg-root /mnt
+kubuntu@kubuntu:~$ sudo mount /dev/nvme0
+nvme0      nvme0n1    nvme0n1p1  nvme0n1p2  nvme0n1p3  nvme0n1p4  nvme0n1p5  
+kubuntu@kubuntu:~$ sudo mount /dev/nvme0
+nvme0      nvme0n1    nvme0n1p1  nvme0n1p2  nvme0n1p3  nvme0n1p4  nvme0n1p5  
+kubuntu@kubuntu:~$ sudo mount /dev/nvme0n1p3 /mnt/boot
+kubuntu@kubuntu:~$ sudo mount --bind /dev /mnt/dev/
+kubuntu@kubuntu:~$ sudo chroot /mnt
+root@kubuntu:/# mount -t proc proc /proc
+root@kubuntu:/# mount -t sysfs sys /sys
+root@kubuntu:/# mount -t devpts devpts /dev/pts
+root@kubuntu:/# sudo nano /etc/crypttab
+sudo: unable to resolve host kubuntu: Temporary failure in name resolution
+root@kubuntu:/# cat /etc/crypttab
+personal UUID=jla1uQ-SwRQ-Mllk-ikwV-4adW-ArbV-BkKHda none luks,discard
+root@kubuntu:/# update-initramfs -k all -c
+update-initramfs: Generating /boot/initrd.img-5.4.0-26-generic
+cryptsetup: ERROR: personal: Source mismatch
+update-initramfs: Generating /boot/initrd.img-5.4.0-58-generic
+cryptsetup: ERROR: personal: Source mismatch
+root@kubuntu:/# 
+
+root@kubuntu:/# sudo nano /etc/crypttab
+sudo: unable to resolve host kubuntu: Temporary failure in name resolution
+root@kubuntu:/# cat /etc/crypttab 
+personal UUID=614c65f4-821a-47ba-853e-c49e1921631a none luks,discard
+root@kubuntu:/# update-initramfs -k all -c
+update-initramfs: Generating /boot/initrd.img-5.4.0-26-generic
+update-initramfs: Generating /boot/initrd.img-5.4.0-58-generic
+root@kubuntu:/# 
+

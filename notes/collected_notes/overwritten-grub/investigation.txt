@@ -1,0 +1,25 @@
+ 
+corsair@personal-laptop:~$ sudo su
+root@personal-laptop:/home/corsair# cd  /boot/efi/EFI/
+root@personal-laptop:/boot/efi/EFI# ls
+BOOT  ubuntu
+root@personal-laptop:/boot/efi/EFI# cd ubuntu/
+root@personal-laptop:/boot/efi/EFI/ubuntu# ls
+BOOTX64.CSV  grub.cfg  grubx64.efi  mmx64.efi  shimx64.efi
+root@personal-laptop:/boot/efi/EFI/ubuntu# cat grub.cfg 
+search.fs_uuid 3773fe6d-383b-4e33-93be-17f17a369e46 root 
+set prefix=($root)'/grub'
+configfile $prefix/grub.cfg
+root@personal-laptop:/boot/efi/EFI/ubuntu# lsblk -o name,uuid,mountpoint
+NAME           UUID                                   MOUNTPOINT
+nvme0n1                                               
+├─nvme0n1p1    6BFB-F958                              /boot/efi
+├─nvme0n1p2    1b0a7b5a-d724-4727-9ebc-06cd099ac37d   /media/corsair/1b0a7b5a-d724-4727-9ebc-06cd099ac37d
+├─nvme0n1p3    3773fe6d-383b-4e33-93be-17f17a369e46   /boot
+├─nvme0n1p4    48b7b2e4-4c03-4339-98f8-672e897ea5fc   
+└─nvme0n1p5    614c65f4-821a-47ba-853e-c49e1921631a   
+  └─personal   jla1uQ-SwRQ-Mllk-ikwV-4adW-ArbV-BkKHda 
+    ├─pvg-swap 21411158-bbf8-4ef9-b57f-caf25f01026f   [SWAP]
+    └─pvg-root 533b29ae-118c-4b5a-9e87-72777a6c203c   /
+root@personal-laptop:/boot/efi/EFI/ubuntu# 
+
