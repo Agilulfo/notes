@@ -8,7 +8,7 @@ I have a laptop provided by the company I work for. Since it's a quite powerfull
 
 Using one system to perform both things is not a so great for at least two reasons.
 1. *Stability*: you do not want something you need for personal use to compromise the stability of your working environment making you unable to work. 
-2. *Security*: you do not want to install something you need for personal use that could leak sensitive work data (and viceversa) 
+2. *Security*: you do not want a vulnerability on something you need for personal use to compromise sensitive data of your working environment (and viceversa) 
 
 An easier way to address the 2 points would be to use 2 separate machines but still you should nowadays use encryption anyway. 
 
