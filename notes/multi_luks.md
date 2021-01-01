@@ -66,10 +66,6 @@ sudo lvcreate -l 100%FREE wvg -n root
 ```
 TODO: I was not sure if the swap could be shared safely so I've opted to inclue the swap as a logical volume
 
-### Perform the installation
-
-Now is time to perform the installation of ubuntu. chose to manually select the partitions and set accordingly the partitions to use as */boot*, *swap* and */* 
-
 repeat the same for other partitions
 ``` bash
 sudo pvcreate /dev/mapper/personal
@@ -79,6 +75,10 @@ sudo lvcreate -l 100%FREE pvg -n root
 ```
 tip: if you make mistakes, commands such as lvrename are available 
 tip: use regularly lsblk to check if you are getting the result you would 
+
+### Perform the installation
+
+Now is time to perform the installation of ubuntu. chose to manually select the partitions and set accordingly the partitions to use as */boot*, *swap* and */* 
 
 ### configure kernel to load the partitions
 
