@@ -1,16 +1,20 @@
-# Use LUKS to encrypt ubuntu partitions
+# Ubuntu dual boot with encrypted partitions
 Encrypting partitions in this way is not a standard flow offered by linux distributions.
 I've decided to write some notes so that next time I'll not have to restart from scratch.
 
 ## Rationale/Goal
+### the problem
 I have a laptop provided by the company I work for. Since it's a quite powerfull machine and I do not like the idea of bringing around 2 laptops I've decided to use the same machine both for *personal* and *work* use.
 
 Using one system to perform both things is not a so great for at least two reasons.
-1. *Stability* you do not want to install something you need for personal use that could compromise your working environment and viceversa 
-2. *Security* you do not want to install something you need for personal use that could leak sensitive work data (and viceversa) 
+1. *Stability*: you do not want something you need for personal use to compromise the stability of your working environment making you unable to work. 
+2. *Security*: you do not want to install something you need for personal use that could leak sensitive work data (and viceversa) 
 
-What you want is then to have 2 separate os (ubuntu linux in my case) instances on the same machine (a.k.a. dual boot) to solve the first point.
-You also want to encrypt both partitions so that one installation cannot temper with data in the other. this should address the 2nd concern.
+An easier way to address the 2 points would be to use 2 separate machines but still you should nowadays use encryption anyway. 
+
+### the plan
+The solution I've decided to put in place is to have 2 separate os (ubuntu linux in my case) instances on the same machine (a.k.a. dual boot) to solve the first point.
+You also want to encrypt both partitions so that one installation cannot temper with data in the other. This should address the 2nd concern.
 
 ## basics
 TODO
