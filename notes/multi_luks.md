@@ -31,6 +31,8 @@ TODO: disk wiping warning
 ## instructions
 First you want to partition your drive
 
+
+### partitioning
 Assuming you use uefi(todo:link to uefi) you want to have:
  - one ESP patition (todo: link to esp) (around 200/300 mb)
  - one partition **for each** ubuntu installation that will be mounted as */boot* (around 500mb), this partition will contain the bootloader (grub) and the kernels. (Such partition will not be encrypted) 
@@ -39,6 +41,10 @@ Assuming you use uefi(todo:link to uefi) you want to have:
 ![starting point](01_starting_point.png)
 
 you can use tools like *gparted* or *partitionmanager* (on kde) to edit your partition table (gpt on uefi) to reach the result above.
+
+### encryption setup
+
+#### setup luks
 
 Our next step is to encrypt the partitions that will contain the data we would like to protect.
 
@@ -49,6 +55,8 @@ sudo cryptsetup open --type=luks /dev/nvme0n1p4 work
 sudo cryptsetup open --type=luks /dev/nvme0n1p5 personal
 ```
 
+#### setup lvm
+
 create a pysical volume and volume gruop and then create logical volumes as you please (in my case one for root and the other for the swap partition)
 ``` bash
 sudo pvcreate /dev/mapper/work 
@@ -57,6 +65,10 @@ sudo lvcreate -L 8G wvg -n swap
 sudo lvcreate -l 100%FREE wvg -n root
 ```
 TODO: I was not sure if the swap could be shared safely so I've opted to inclue the swap as a logical volume
+
+### Perform the installation
+
+Now is time to perform the installation of ubuntu. chose to manually select the partitions and set accordingly the partitions to use as */boot*, *swap* and */* 
 
 repeat the same for other partitions
 ``` bash
@@ -67,6 +79,8 @@ sudo lvcreate -l 100%FREE pvg -n root
 ```
 tip: if you make mistakes, commands such as lvrename are available 
 tip: use regularly lsblk to check if you are getting the result you would 
+
+### configure kernel to load the partitions
 
 Use lsblk to get the uuid of the parition 
 for instance in my case the uuid I have to take note is `48b7b2e4-4c03-4339-98f8-672e897ea5fc`
